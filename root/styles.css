@@ -1,0 +1,30 @@
+body{
+	margin:0px;
+}
+
+#pageTop{
+	background:url('style/headerSliver.jpg') repeat-x;
+	height: 90px;
+}
+
+#pageTop > #pageTopWrap{
+	width: 1000px;
+	margin: 0 auto;
+	border: 1px dashed black;
+	height: 88px;
+}
+
+#pageTop > #pageTopWrap > #pageTopLogo{
+	height: 90px;
+	width: 108px;
+    display: inline-block;
+}
+
+#pageTop > #pageTopWrap > #pageTopRest{
+	height: 90px;
+	width: 888px;
+	background-color: blue;
+	display: inline-block;
+	
+
+}
