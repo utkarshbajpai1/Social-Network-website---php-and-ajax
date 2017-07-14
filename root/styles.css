@@ -25,6 +25,54 @@ body{
 	width: 888px;
 	background-color: blue;
 	display: inline-block;
-	
+	position: absolute;
+}
 
+#pageTop > #pageTopWrap > #pageTopRest > #menu1{
+	height: 43px;
+	background-color: red;
+	border: 1px dashed yellow;
+}
+
+#pageTop > #pageTopWrap > #pageTopRest > #menu2{
+	height: 43px;
+	background-color: red;
+	
+}
+
+#pageTop > #pageTopWrap > #pageTopRest > #menu2 > div{
+	
+	padding: 4px;
+}
+
+#pageTop > #pageTopWrap > #pageTopRest > #menu1 > div{
+	text-align: right;
+	margin-top: 8px;
+	padding: 0 30px;
+}
+
+
+#pageTop > #pageTopWrap > #pageTopRest > #menu1 > div >a{
+	color: white;
+	padding: 0 10px;
+	text-decoration: none;
+	font-family: verdana;
+	font-size: 16px;
+}
+
+
+#pageTop > #pageTopWrap > #pageTopRest > #menu1 > div > a:hover{
+	color: grey;
+	
+}
+
+#pageTop > #pageTopWrap > #pageTopRest > #menu2 > div >a{
+	color: white;
+	padding: 0 10px;
+	text-decoration: none;
+}
+
+#pageTop > #pageTopWrap > #pageTopRest > #menu2 > div > a:hover{
+	color: grey;
+	
 }
