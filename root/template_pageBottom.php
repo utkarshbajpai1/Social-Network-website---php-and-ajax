@@ -1,0 +1,1 @@
+<div id="pageBottom">  &copy; Social Network developed way to go in the web development .</div>
