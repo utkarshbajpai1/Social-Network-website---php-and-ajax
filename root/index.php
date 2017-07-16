@@ -30,7 +30,7 @@
 
 			</div>
 		</div>
-		<div id="pageMiddle"></div>
-		<div id="pageBottom"></div>
+		<div id="pageMiddle"> &nbsp; </div>
+		<div id="pageBottom">  &copy; Social Network developed @gamwebdev </div>
 	</body>
 </html>
