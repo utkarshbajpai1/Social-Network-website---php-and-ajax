@@ -5,6 +5,7 @@
 		<script src="https://use.fontawesome.com/920a43d2cd.js"></script>
 		<link rel="stylesheet" href="styles.css">
 		<script src="js/main.js"></script>
+		<script src="js/ajax.js"></script>
 	</head>
 	<body>
 		<?php include_once("template_pageTop.php"); ?>
