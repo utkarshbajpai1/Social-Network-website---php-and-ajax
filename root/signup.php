@@ -5,7 +5,8 @@ if(isset($_SESSION["username"])){
 	header("location: message.php?msg=NO to that weenis");
     exit();
 }
-?><?php
+?>
+<?php
 // Ajax calls this NAME CHECK code to execute
 if(isset($_POST["usernamecheck"])){
 	include_once("php_includes/db_conx.php");
