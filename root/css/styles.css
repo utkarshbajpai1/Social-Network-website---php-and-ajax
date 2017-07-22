@@ -3,7 +3,7 @@ body{
 }
 
 #pageTop{
-	background:url('style/headerSliver.jpg') repeat-x;
+	background:url('../style/headerSliver.jpg') repeat-x;
 	height: 90px;
 }
 

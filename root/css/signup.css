@@ -1,0 +1,20 @@
+#signupform{
+	margin-top:24px;	
+}
+#signupform > div {
+	margin-top: 12px;	
+}
+#signupform > input,select {
+	width: 200px;
+	padding: 3px;
+	background: #F3F9DD;
+}
+#signupbtn {
+	font-size:18px;
+	padding: 12px;
+}
+#terms {
+	border:#CCC 1px solid;
+	background: #F5F5F5;
+	padding: 12px;
+}

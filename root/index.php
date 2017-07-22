@@ -3,7 +3,7 @@
 	<head>
 		<title>php-Social Network</title>
 		<script src="https://use.fontawesome.com/920a43d2cd.js"></script>
-		<link rel="stylesheet" href="styles.css">
+		<link rel="stylesheet" href="css/styles.css">
 		<script src="js/main.js"></script>
 	</head>
 	<body>
