@@ -14,7 +14,7 @@
 
 		<div id="pageMiddle">
 
-			 <h3>Sign Up Here</h3>
+			 <h3 style="margin-left: 350px;">Sign Up Here</h3>
 
 			  <form name="signupform" id="signupform" onsubmit="return false;">
 

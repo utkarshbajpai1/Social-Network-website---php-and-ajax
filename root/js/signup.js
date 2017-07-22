@@ -12,7 +12,7 @@ function emptyElement(x){
 	_(x).innerHTML = "";
 }
 function checkusername(){
-	var u = _("username").value;
+	var u = _("username").value; // defined for input fields
 	if(u != ""){
 		_("unamestatus").innerHTML = 'checking ...';
 		var ajax = ajaxObj("POST", "signup.php");
@@ -21,9 +21,10 @@ function checkusername(){
 	            _("unamestatus").innerHTML = ajax.responseText;
 	        }
         }
-        ajax.send("usernamecheck="+u);
+        ajax.send("usernamecheck="+u);  // need to see
 	}
 }
+
 function signup(){
 	var u = _("username").value;
 	var e = _("email").value;
