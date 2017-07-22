@@ -1,15 +1,39 @@
-function restrict(elem){
-	var tf = _(elem);
-	var rx = new RegExp;
-	if(elem == "email"){
-		rx = /[' "]/gi;
-	} else if(elem == "username"){
-		rx = /[^a-z0-9]/gi;
-	}
-	tf.value = tf.value.replace(rx, "");
-}
-function emptyElement(x){
-	_(x).innerHTML = "";
+var user = document.getElementById('username');
+	user.addEventListener('blur',checkusername,false);
+	user.addEventListener('keyup', function restrict(){
+
+		var tf 	   = _('username');
+		var rx 	   = new RegExp;
+			rx 	   = /[^a-z0-9]/gi;
+		tf.value   = tf.value.replace(rx, "");
+
+	}, false);
+
+var email = document.getElementById("email");
+	email.addEventListener("focus", emptyElement, false);
+	email.addEventListener("keyup", function restrict(){
+
+		var tf 		= _('email');
+		var rx 		= new RegExp;
+			rx 		= /[^a-z0-9]/gi;
+		tf.value 	= tf.value.replace(rx, "");
+
+	}, false);
+
+var pass1 	= document.getElementById('pass1');
+	pass1.addEventListener("focus", emptyElement, false);	
+
+var pass2 	= document.getElementById('pass2');
+	pass2.addEventListener("focus", emptyElement, false);
+
+var gender 	= document.getElementById("gender");
+	gender.addEventListener("focus", emptyElement, false);		
+
+var country = document.getElementById("country");
+	country.addEventListener("focus", emptyElement, false);			
+
+function emptyElement(){
+	_('status').innerHTML = "";
 }
 function checkusername(){
 	var u = _("username").value; // defined for input fields
@@ -26,12 +50,12 @@ function checkusername(){
 }
 
 function signup(){
-	var u = _("username").value;
-	var e = _("email").value;
-	var p1 = _("pass1").value;
-	var p2 = _("pass2").value;
-	var c = _("country").value;
-	var g = _("gender").value;
+	var u 	= _("username").value;
+	var e 	= _("email").value;
+	var p1 	= _("pass1").value;
+	var p2 	= _("pass2").value;
+	var c 	= _("country").value;
+	var g 	= _("gender").value;
 	var status = _("status");
 	if(u == "" || e == "" || p1 == "" || p2 == "" || c == "" || g == ""){
 		status.innerHTML = "Fill out all of the form data";

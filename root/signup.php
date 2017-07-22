@@ -7,7 +7,7 @@
 		<link rel="stylesheet" href="css/signup.css">
 		<script src="js/main.js"></script>
 		<script src="js/ajax.js"></script>
-		<script src="js/signup.js"></script>
+		
 	</head>
 	<body>
 		<?php include_once("template_pageTop.php"); ?>
@@ -19,10 +19,10 @@
 			  <form name="signupform" id="signupform" onsubmit="return false;">
 
 			    <div>Username: </div>
-			    <input id="username" type="text" onblur="checkusername()" onkeyup="restrict('username')" maxlength="16">
+			    <input id="username" type="text" maxlength="16">
 			    <span id="unamestatus"></span>
 			    <div>Email Address:</div>
-			    <input id="email" type="text" onfocus="emptyElement('status')" onkeyup="restrict('email')" maxlength="88">
+			    <input id="email" type="text" maxlength="88">
 			    <div>Create Password:</div>
 			    <input id="pass1" type="password" onfocus="emptyElement('status')" maxlength="16">
 			    <div>Confirm Password:</div>
@@ -57,5 +57,6 @@
 		</div>
 
 		<?php include_once("template_pageBottom.php"); ?>
+		<script src="js/signup.js"></script>
 	</body>
 </html>
