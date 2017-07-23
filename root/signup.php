@@ -1,58 +1,69 @@
-<?php
-session_start();
-// If user is logged in, header them away
-if(isset($_SESSION["username"])){
-	header("location: message.php?msg=NO to that weenis");
-    exit();
-}
+<?php 
+	session_start();
+	if(isset($_SESSION["username"])){
+		header("location: message.php?msg=hello user is alredy logged in");
+	}
+	exit();
 ?>
-<?php
-// Ajax calls this NAME CHECK code to execute
-if(isset($_POST["usernamecheck"])){
-	include_once("php_includes/db_conx.php");
-	$username = preg_replace('#[^a-z0-9]#i', '', $_POST['usernamecheck']);
-	$sql = "SELECT id FROM users WHERE username='$username' LIMIT 1";
-    $query = mysqli_query($db_conx, $sql); 
-    $uname_check = mysqli_num_rows($query);
-    if (strlen($username) < 3 || strlen($username) > 16) {
-	    echo '<strong style="color:#F00;">3 - 16 characters please</strong>';
-	    exit();
-    }
-	if (is_numeric($username[0])) {
+
+<?php 
+
+	if(isset($_POST["usernamecheck"])){
+		include_once("php_includes/db_conx.php");
+		$username = preg_replace('#[^a-z0-9]#i', '', $_POST['usernamecheck']);
+		$sql = "SELECT id
+				FROM users
+				WHERE username='$username'
+				LIMIT 1";
+		$query 		 = mysqli_query($db_conx, $sql);
+		$uname_check = mysqli_num_rows($query);	
+
+		if (strlen($username) < 3 || strlen($username) > 16 {
+				echo '<strong style="color:brown;"> 3-16 characters please </strong>';
+				exit(); 
+		}	
+
+		if (is_numeric($username[0])) {
 	    echo '<strong style="color:#F00;">Usernames must begin with a letter</strong>';
 	    exit();
-    }
-    if ($uname_check < 1) {
+    	}
+    	if ($uname_check < 1) {
 	    echo '<strong style="color:#009900;">' . $username . ' is OK</strong>';
 	    exit();
     } else {
 	    echo '<strong style="color:#F00;">' . $username . ' is taken</strong>';
 	    exit();
     }
-}
-?><?php
-// Ajax calls this REGISTRATION code to execute
-if(isset($_POST["u"])){
-	// CONNECT TO THE DATABASE
-	include_once("php_includes/db_conx.php");
-	// GATHER THE POSTED DATA INTO LOCAL VARIABLES
-	$u = preg_replace('#[^a-z0-9]#i', '', $_POST['u']);
-	$e = mysqli_real_escape_string($db_conx, $_POST['e']);
-	$p = $_POST['p'];
-	$g = preg_replace('#[^a-z]#', '', $_POST['g']);
-	$c = preg_replace('#[^a-z ]#i', '', $_POST['c']);
-	// GET USER IP ADDRESS
-    $ip = preg_replace('#[^0-9.]#', '', getenv('REMOTE_ADDR'));
-	// DUPLICATE DATA CHECKS FOR USERNAME AND EMAIL
-	$sql = "SELECT id FROM users WHERE username='$u' LIMIT 1";
-    $query = mysqli_query($db_conx, $sql); 
-	$u_check = mysqli_num_rows($query);
-	// -------------------------------------------
-	$sql = "SELECT id FROM users WHERE email='$e' LIMIT 1";
-    $query = mysqli_query($db_conx, $sql); 
-	$e_check = mysqli_num_rows($query);
-	// FORM DATA ERROR HANDLING
-	if($u == "" || $e == "" || $p == "" || $g == "" || $c == ""){
+
+	}
+?>
+
+<?php
+	if(isset($_POST["u"])){
+		include_once("php_includes/db_conx.php");
+		$u = preg_replace('#[^a-z0-9]#i', '', $_POST['u']);
+		$e = mysqli_real_escape_string($db_conx,$_POST['e']);
+		$p = $_POST['p'];
+		$g = preg_replace('#[^a-z]#i', '', $_POST['g']);
+		$c = preg_replace('#[^a-z]#i', '', $_POST['c']);
+
+		$ip = preg_replace('#[^0-9.]#', '', getenv('REMOTE_ADDR'));
+
+		$sql = "SELECT id
+				FROM users
+				WHERE username = '$u'
+				LIMIT 1";
+		$query = mysqli_query($db_conx, $sql);
+		$u_check = mysqli_num_rows($query);
+
+		$sql = "SELECT id
+				FROM users
+				WHERE email='$e'
+				LIMIT 1";
+		$query = mysqli_query($db_conx, $sql);
+		$e_check = mysqli_num_rows($query);	
+
+		if($u == "" || $e == "" || $p == "" || $g == "" || $c == ""){
 		echo "The form submission is missing values.";
         exit();
 	} else if ($u_check > 0){ 
@@ -67,26 +78,23 @@ if(isset($_POST["u"])){
     } else if (is_numeric($u[0])) {
         echo 'Username cannot begin with a number';
         exit();
-    } else {
-	// END FORM DATA ERROR HANDLING
-	    // Begin Insertion of data into the database
-		// Hash the password and apply your own mysterious unique salt
-		$cryptpass = crypt($p);
+    } else{
+    	// hashing and insertion of data
+    	$cryptpass = crypt($p);
 		include_once ("php_includes/randStrGen.php");
 		$p_hash = randStrGen(20)."$cryptpass".randStrGen(20);
-		// Add user info into the database table for the main site table
-		$sql = "INSERT INTO users (username, email, password, gender, country, ip, signup, lastlogin, notescheck)       
-		        VALUES('$u','$e','$p_hash','$g','$c','$ip',now(),now(),now())";
-		$query = mysqli_query($db_conx, $sql); 
-		$uid = mysqli_insert_id($db_conx);
-		// Establish their row in the useroptions table
+		$sql = "INSERT INTO users (username,email,password,gender, country, ip, signup, lastlogin, notescheck)       
+		    VALUES('$u','$e','$p_hash','$g','$c','$ip',now(),now(),now())";
+		$query = $query = mysqli_query($db_conx, $sql); 
+		$uid = mysqli_insert_id($db_conx);  
+		
 		$sql = "INSERT INTO useroptions (id, username, background) VALUES ('$uid','$u','original')";
 		$query = mysqli_query($db_conx, $sql);
-		// Create directory(folder) to hold each user's files(pics, MP3s, etc.)
+
 		if (!file_exists("user/$u")) {
 			mkdir("user/$u", 0755);
-		}
-		// Email the user their activation link
+
+
 		$to = "$e";							 
 		$from = "auto_responder@yoursitename.com";
 		$subject = 'yoursitename Account Activation';
@@ -96,13 +104,16 @@ if(isset($_POST["u"])){
         $headers .= "Content-type: text/html; charset=iso-8859-1\n";
 		mail($to, $subject, $message, $headers);
 		echo "signup_success";
-		exit();
+		exit();	
+		} 
+
+		exit(); 
+    }
+
 	}
-	exit();
-}
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>php-Social Network</title>

@@ -1,5 +1,5 @@
 var user = document.getElementById('username');
-	user.addEventListener('blur',checkusername,false);
+	user.addEventListener('blur', checkusername, false);
 	user.addEventListener('keyup', function restrict(){
 
 		var tf 	   = _('username');
