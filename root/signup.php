@@ -1,9 +1,10 @@
 <?php 
 	session_start();
 	if(isset($_SESSION["username"])){
-		header("location: message.php?msg=hello user is alredy logged in");
+		header("location: message.php?msg=hello user is already logged in");
+		exit();
 	}
-	exit();
+	
 ?>
 
 <?php 
@@ -18,7 +19,7 @@
 		$query 		 = mysqli_query($db_conx, $sql);
 		$uname_check = mysqli_num_rows($query);	
 
-		if (strlen($username) < 3 || strlen($username) > 16 {
+		if (strlen($username) < 3 || strlen($username) > 16) {
 				echo '<strong style="color:brown;"> 3-16 characters please </strong>';
 				exit(); 
 		}	
@@ -80,12 +81,12 @@
         exit();
     } else{
     	// hashing and insertion of data
-    	$cryptpass = crypt($p);
-		include_once ("php_includes/randStrGen.php");
-		$p_hash = randStrGen(20)."$cryptpass".randStrGen(20);
+    	include_once("php_includes/crypt.php");
+    	$cryptPass = cryptPass($p);
+
 		$sql = "INSERT INTO users (username,email,password,gender, country, ip, signup, lastlogin, notescheck)       
-		    VALUES('$u','$e','$p_hash','$g','$c','$ip',now(),now(),now())";
-		$query = $query = mysqli_query($db_conx, $sql); 
+		    VALUES('$u','$e','$cryptPass','$g','$c','$ip',now(),now(),now())";
+		$query = mysqli_query($db_conx, $sql); 
 		$uid = mysqli_insert_id($db_conx);  
 		
 		$sql = "INSERT INTO useroptions (id, username, background) VALUES ('$uid','$u','original')";
@@ -93,12 +94,12 @@
 
 		if (!file_exists("user/$u")) {
 			mkdir("user/$u", 0755);
-
+		}	
 
 		$to = "$e";							 
 		$from = "auto_responder@yoursitename.com";
 		$subject = 'yoursitename Account Activation';
-		$message = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>yoursitename Message</title></head><body style="margin:0px; font-family:Tahoma, Geneva, sans-serif;"><div style="padding:10px; background:#333; font-size:24px; color:#CCC;"><a href="http://www.yoursitename.com"><img src="http://www.yoursitename.com/images/logo.png" width="36" height="30" alt="yoursitename" style="border:none; float:left;"></a>yoursitename Account Activation</div><div style="padding:24px; font-size:17px;">Hello '.$u.',<br /><br />Click the link below to activate your account when ready:<br /><br /><a href="http://www.yoursitename.com/activation.php?id='.$uid.'&u='.$u.'&e='.$e.'&p='.$p_hash.'">Click here to activate your account now</a><br /><br />Login after successful activation using your:<br />* E-mail Address: <b>'.$e.'</b></div></body></html>';
+		$message = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>yoursitename Message</title></head><body style="margin:0px; font-family:Tahoma, Geneva, sans-serif;"><div style="padding:10px; background:#333; font-size:24px; color:#CCC;"><a href="http://www.yoursitename.com"><img src="http://www.yoursitename.com/images/logo.png" width="36" height="30" alt="yoursitename" style="border:none; float:left;"></a>yoursitename Account Activation</div><div style="padding:24px; font-size:17px;">Hello '.$u.',<br /><br />Click the link below to activate your account when ready:<br /><br /><a href="http://www.yoursitename.com/activation.php?id='.$uid.'&u='.$u.'&e='.$e.'&p='.$cryptPass.'">Click here to activate your account now</a><br /><br />Login after successful activation using your:<br />* E-mail Address: <b>'.$e.'</b></div></body></html>';
 		$headers = "From: $from\n";
         $headers .= "MIME-Version: 1.0\n";
         $headers .= "Content-type: text/html; charset=iso-8859-1\n";
@@ -110,7 +111,7 @@
 		exit(); 
     }
 
-	}
+	
 ?>
 
 <!DOCTYPE html>

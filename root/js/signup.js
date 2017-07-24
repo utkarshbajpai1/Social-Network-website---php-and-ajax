@@ -11,6 +11,8 @@ var user = document.getElementById('username');
 
 var email = document.getElementById("email");
 	email.addEventListener("focus", emptyElement, false);
+	/*
+	
 	email.addEventListener("keyup", function restrict(){
 
 		var tf 		= _('email');
@@ -19,6 +21,8 @@ var email = document.getElementById("email");
 		tf.value 	= tf.value.replace(rx, "");
 
 	}, false);
+
+	*/
 
 var pass1 	= document.getElementById('pass1');
 	pass1.addEventListener("focus", emptyElement, false);	
@@ -74,7 +78,7 @@ function signup(){
 					_("signupbtn").style.display = "block";
 				} else {
 					window.scrollTo(0,0);
-					_("signupform").innerHTML = "OK "+u+", check your email inbox and junk mail box at <u>"+e+"</u> in a moment to complete the sign up process by activating your account. You will not be able to do anything on the site until you successfully activate your account.";
+					_("signupform").innerHTML = "OK" +u+ ", check your email inbox and junk mail box at <u>"+e+"</u> in a moment to complete the sign up process by activating your account. You will not be able to do anything on the site until you successfully activate your account.";
 				}
 	        }
         }
