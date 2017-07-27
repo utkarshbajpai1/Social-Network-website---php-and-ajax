@@ -10,7 +10,7 @@ $log_username = "";
 $log_password = "";
 // User Verify function
 function evalLoggedUser($conx,$id,$u,$p){
-	$sql = "SELECT ip FROM users WHERE id='$id' AND username='$u' AND password='$p' AND activated='1' LIMIT 1";
+	$sql = "SELECT ip FROM users WHERE id='$id' AND username='$u' AND password='$p' LIMIT 1";
     $query = mysqli_query($conx, $sql);
     $numrows = mysqli_num_rows($query);
 	if($numrows > 0){
