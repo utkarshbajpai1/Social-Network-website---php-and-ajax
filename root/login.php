@@ -1,23 +1,31 @@
+<?php
+include_once("php_includes/check_login_status.php");
+// If user is already logged in, header that weenis away
+if($user_ok == true){
+	header("location: user.php?u=".$_SESSION["username"]);
+    exit();
+}
+?>
 <?php 
 	if (isset($_POST['e'])) {
 		include_once('php_includes/db_conx.php');
 		$e = mysqli_real_escape_string($db_conx, $_POST['e']);
 
 		include_once('php_includes/crypt.php');
-		$p = cryptPass($_POST['p']);
+		$p = md5($_POST['p']);
 
 		$ip = preg_replace('#[^0-9.]#', '', getenv('REMOTE_ADDR'));
 
 		if ($e == "" || $p == "") {
 			echo 'login_failed';
-			exit()-;
+			exit();
 		}else{
 
-			$sql = 'SELECT id, username, password 
+			$sql = "SELECT id, username, password 
 					FROM users 
 					WHERE email='$e'
-					LIMIT 1';
-			$query = mysqli_query($db_conx, $query);
+					LIMIT 1";
+			$query = mysqli_query($db_conx, $sql);
 			$row   = mysqli_fetch_row($query);
 			$db_id 			= $row[0];
 			$db_username 	= $row[1];

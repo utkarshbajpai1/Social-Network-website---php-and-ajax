@@ -81,11 +81,13 @@
         exit();
     } else{
     	// hashing and insertion of data
-    	include_once("php_includes/crypt.php");
-    	$cryptPass = cryptPass($p);
+    	//include_once("php_includes/crypt.php");
+    	//$cryptPass = cryptPass($p);
+
+    	$pass = md5($p);
 
 		$sql = "INSERT INTO users (username,email,password,gender, country, ip, signup, lastlogin, notescheck)       
-		    VALUES('$u','$e','$cryptPass','$g','$c','$ip',now(),now(),now())";
+		    VALUES('$u','$e','$pass','$g','$c','$ip',now(),now(),now())";
 		$query = mysqli_query($db_conx, $sql); 
 		$uid = mysqli_insert_id($db_conx);  
 		
