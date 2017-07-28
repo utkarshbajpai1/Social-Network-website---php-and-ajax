@@ -56,7 +56,7 @@ while ($row = mysqli_fetch_array($user_query, MYSQLI_ASSOC)) {
 </head>
 <body>
 <?php include_once("template_pageTop.php"); ?>
-<div id="pageMiddle">
+<div id="pageMiddle" style="margin-left: 350px;">
   <h3><?php echo $u; ?></h3>
   <p>Is the viewer the page owner, logged in and verified? <b><?php echo $isOwner; ?></b></p>
   <p>Gender: <?php echo $sex; ?></p>
