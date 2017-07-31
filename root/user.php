@@ -25,7 +25,7 @@ if($numrows < 1){
 }
 // Check to see if the viewer is the account owner
 $isOwner = "no";
-if($u == $log_username && $user_ok == true){
+if($u == $log_username && $user_ok == true){ // $u present in the url matches or not with variable stored in the session when the user is loggedin
 	$isOwner = "yes";
 }
 // Fetch the user row from the query above
@@ -53,6 +53,7 @@ while ($row = mysqli_fetch_array($user_query, MYSQLI_ASSOC)) {
 <link rel="stylesheet" href="css/styles.css">
 <script src="js/main.js"></script>
 <script src="js/ajax.js"></script>
+<script src=" friendSystem.js "></script>
 </head>
 <body>
 <?php include_once("template_pageTop.php"); ?>
@@ -65,6 +66,10 @@ while ($row = mysqli_fetch_array($user_query, MYSQLI_ASSOC)) {
   <p>Join Date: <?php echo $joindate; ?></p>
   <p>Last Session: <?php echo $lastsession; ?></p>
 </div>
+	
+  <p>Friend Button: <span id="friendBtn"><?php echo $friend_button; ?></span></p>
+  <p>Block Button: <span id="blockBtn"><?php echo $block_button; ?></span></p>
+
 <?php include_once("template_pageBottom.php"); ?>
 </body>
 </html>
