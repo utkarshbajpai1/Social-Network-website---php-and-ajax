@@ -1,3 +1,6 @@
+<?php
+	include_once("php_includes/check_login_status.php");
+?>
 <!doctype html>
 <html>
 	<head>
